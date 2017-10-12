@@ -15,9 +15,9 @@ RUN npm install
 EXPOSE 8080
 
 # Install Nodemon
-RUN npm install -g yarn
-RUN npm install -g typescript
-RUN npm install -g nodemon mocha supervisor
+RUN npm install yarn -g
+RUN npm install typescript -g
+RUN npm install nodemon mocha supervisor -g
 
 CMD ["yarn", "start"]
 
