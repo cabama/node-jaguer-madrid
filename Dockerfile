@@ -13,6 +13,7 @@ EXPOSE 8080
 
 # Install Nodemon
 RUN npm install
+RUN npm install -g tsc
 RUN npm install yarn -g
 RUN npm install typescript -g
 RUN npm install nodemon mocha supervisor -g
