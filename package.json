@@ -1,0 +1,16 @@
+{
+  "name": "jaguer_backend",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "Carlos Barreiro barreymata@gmail.com",
+  "main": "src/app.ts",
+  "scripts": {
+    "start": "nodemon -L -e ts,json --exec \"npm run compile\"",
+    "compile": "tsc && node bin/app.js"
+  },
+  "dependencies": {
+    "@types/express": "^4.0.37",
+    "express": "^4.13.3"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "noImplicitAny": false,
+      "strictNullChecks": false,
+      "moduleResolution": "node",
+      "baseUrl": "./src",
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "outDir": "bin"
+    }
+  }
