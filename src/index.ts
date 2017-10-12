@@ -1,22 +1,23 @@
-import { di } from '@seedtag/node-sdk'
-import { Express, DbConnection, Logger } from './config'
-import { MemoryStore } from './providers/MemoryStore'
+'use strict';
 
-@di.Bootstrap()
-class Main {
-  constructor (
-    private express: Express,
-    private memoryStore: MemoryStore,
-    private log: Logger,
-    private db: DbConnection) { this.main() }
+// https://nodejs.org/uk/docs/guides/nodejs-docker-webapp/
 
-  async main () {
-    const server = await this.express.listen(3000)
+//const express = require('express');
+import * as express from 'express'
+// Constants
+const PORT = 80;
+const HOST = '0.0.0.0';
 
-    // Store reference to server
-    this.memoryStore.set('app', this.express.getExpressApp())
-    this.memoryStore.set('server', server)
+// App
+const app = express();
 
-    this.log.info('App is listening on 3000')
-  }
-}
+app.get('/nombre/:name', (req, res)=>{
+  res.send('Hola '+name)
+})
+
+app.get('/', (req, res) => {
+  res.send('<h1>Hola beatriz!!</h1>\n');
+});
+
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
