@@ -7,20 +7,14 @@ WORKDIR /usr/src/jaguer
 
 # Install app dependencies
 COPY package.json /usr/src/jaguer
-RUN ls
-RUN npm install
+COPY tsconfig.json /usr/src/jaguer
 
-# Bundle app source
-#COPY . /usr/src/jaguer
 EXPOSE 8080
 
 # Install Nodemon
+RUN npm install
 RUN npm install yarn -g
 RUN npm install typescript -g
 RUN npm install nodemon mocha supervisor -g
 
 CMD ["yarn", "start"]
-
-
-
-#CMD [ "npm", "start" ]
