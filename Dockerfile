@@ -6,8 +6,8 @@ RUN mkdir -p /usr/src/jaguer/src
 WORKDIR /usr/src/jaguer
 
 # COPY PROJECT SETTINGS
-COPY package.json /usr/src/jaguer
-COPY tsconfig.json /usr/src/jaguer
+ADD package.json /usr/src/jaguer
+ADD tsconfig.json /usr/src/jaguer
 
 # EXPOSE PORT
 EXPOSE 8080

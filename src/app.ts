@@ -4,19 +4,26 @@
 
 //const express = require('express');
 import * as express from 'express'
+
 // Constants
 const PORT = 80;
 const HOST = '0.0.0.0';
 
 // App
-const app = express();
+const app = express()
+// set the view engine to ejs
+app.set('views', __dirname + '/../public')
+app.set('view engine', 'ejs');
+// Public folder
+app.use("/public", express.static(__dirname + '/../public'));
+
 
 app.get('/nombre/:name', (req, res)=>{
-  res.send('Hola '+name)
+  res.render('')
 })
 
 app.get('/', (req, res) => {
-  res.send('<h1>Hola beatriz!!</h1>\n');
+  res.render('template.ejs')
 });
 
 app.listen(PORT, HOST);
