@@ -5,10 +5,10 @@
       "noImplicitAny": false,
       "strictNullChecks": false,
       "moduleResolution": "node",
-      "baseUrl": "./src",
       "allowSyntheticDefaultImports": true,
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
+      "baseUrl": "./src",
       "outDir": "bin"
     }
   }
