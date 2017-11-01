@@ -1,14 +1,16 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "noImplicitAny": false,
-      "strictNullChecks": false,
-      "moduleResolution": "node",
-      "allowSyntheticDefaultImports": true,
-      "experimentalDecorators": true,
-      "emitDecoratorMetadata": true,
-      "baseUrl": "./src",
-      "outDir": "bin"
-    }
-  }
+  "version": "1.7.5",
+  "compilerOptions": {
+  "target": "es6",
+  "module": "commonjs", // 1
+  "emitDecoratorMetadata": true,
+  "experimentalDecorators": true,
+  "outDir": "bin" // 2
+ },
+ "paths": {
+  "*" : ["./*"]
+},
+ "exclude": [
+    "node_modules" // 3
+  ]
+ }
