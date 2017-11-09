@@ -1,4 +1,4 @@
 module.exports = {
     'port': process.env.PORT || 8080,
-    'database': 'mongodb://localhost/prueba',
+    'database': 'mongodb://localhost:27017/prueba',
 };

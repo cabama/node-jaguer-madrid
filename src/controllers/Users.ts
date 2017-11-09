@@ -1,39 +1,69 @@
-import { MdUser } from 'models/MD_Users'
-import {JwtService as jwt}  from 'services/jwt'
+import { MdUser } from '../models/MD_Users'
+import {JwtService as jwt}  from '../services/jwt'
 import * as bcrypt from 'bcrypt-nodejs'
+import { Request, Response } from 'express';
+import * as bodyParser from 'body-parser';
+import {everyTrue} from '../config/Utils'
 
 
-class CtrUser {
+class Email {
+	public email: string
+	constructor (email: string) {
+		this.email = email.toLocaleLowerCase()
+	}
+	toString(): string{
+		return this.email
+	}
+}
 
-	constructor (){}
+type User = {
+	username: string
+	password: string
+	name: string    
+	surname: string 
+	email: Email   
+	role: 'Admin' | 'User'
+	image?: any
+}
 
-	createUser (req, res) {
 
-		let user = new MdUser()
-		var params   = req.body;
+export class CtrUser {
 
-		user.username = params.username;
-		user.name     = params.name;
-		user.surname  = params.surname;
-		user.email    = params.email.toLowerCase();
-		user.role     = 'ROLE_USER';
-		user.image    = 'null';
+	private request;
+	private response;
+	private params;
 
-		if (params.password){
-			console.log('Estoy dentro')
-			console.log(user)
-			bcrypt.hash(params.password, null, null, (err, hash) => {
-				user.password = hash;
-				user.save( (err, userStored) => {
-					if (err) {
-						console.log(err);
-						res.status(500).send('Fallo al guardar el usuario, no todos los campos se encuentran disponibles');
-					} else {
-						res.status(200).send({user: userStored})
-					}
-				});
-			});
+	test (req, res) {
+		console.log('Me encuentro en el apartado de los test.')
+		res.status(200).send('Estoy en una prueba');		
+	}
+
+	async createUser (req: Request, res: Response) {
+
+		this.firstWork(req, res)
+		const paramUser = this.getUserFromParams()
+
+		if (  paramUser == false) {
+			res.status(500).send('There arent all parameters');
+			return
 		}
+			
+		let mdUser = new MdUser()
+		mdUser.username = paramUser.username
+		mdUser.name     = paramUser.name
+		mdUser.surname  = paramUser.surname
+		mdUser.email    = paramUser.email.toString()
+		mdUser.role     = 'ROLE_USER';
+		mdUser.password = await this.hashPassword(paramUser.password)
+
+		this.saveUser(mdUser)
+		.then( () => {
+			res.status(200).send('User saved!')
+		})
+		.catch( reason => {
+			res.status(500).send(reason)
+		})
+
 	}//create user
 
 	updateUser (req, res) {
@@ -98,5 +128,56 @@ class CtrUser {
 		});
 	} //getUser
 
+	private firstWork (req: Request, res: Response) {
+		this.request = req
+		this.response = res
+		this.params = req.body
+	}
 
-}
+	private getUserFromParams (): User | false  {
+		const username =  this.params.username ? this.params.username : false;
+		const name =  this.params.name ? this.params.name : false;
+		const surname = this.params.surname ? this.params.surname : false;
+		const email = new Email (this.params.email as string);
+		const role = 'Admin';
+		const password = this.params.password ? this.params.password : false;
+
+		const  checkParams = everyTrue([username, name, surname, email, password])
+		if (checkParams) {
+			return {username, name, surname, email, role, password}
+		} else {
+			return false
+		}
+	}
+
+	private hashPassword (password: string): Promise<string> {
+		return new Promise ((resolve, reject) => {
+			bcrypt.hash(password, null, null, (err, hash) => {
+				if (hash) {
+					resolve(hash)
+				} else {
+					reject(err)
+				}
+			})
+		})//Promise
+	}//funct
+
+	private saveUser(mdUser): Promise<boolean> {
+		return new Promise ( (resolve, reject) => {
+			mdUser.save((err, userStore) => {
+				if (err) {
+					return reject('Error saving user.')
+				} else {
+					if (!userStore){
+						return reject('The user is not saved')
+					} else {
+						resolve(true)
+					}
+				}
+			})
+		})
+	}
+
+
+
+} //class
