@@ -9,9 +9,6 @@ WORKDIR /usr/src/jaguer
 ADD package.json /usr/src/jaguer
 ADD tsconfig.json /usr/src/jaguer
 
-# EXPOSE PORT
-EXPOSE 8080
-
 # Install Nodemon
 RUN npm install
 RUN npm install -g tsc

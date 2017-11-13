@@ -5,13 +5,17 @@
 //const express = require('express');
 import * as express from 'express';
 import * as moment from 'moment';
-import * as enrouting from './routes/rt_index';
+import * as enrouting from './routes/Index.Router';
 import * as bodyParser from 'body-parser'
-import * as mongoose from 'mongoose'
+import mongoose = require("mongoose"); //import mongoose
 
 // Constants
 const PORT = 80;
 const HOST = '0.0.0.0';
+
+//Mongo
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://mongo:27017");
 
 // App
 const app = express()
@@ -25,17 +29,7 @@ app.use(bodyParser.json())
 app.use("/public", express.static(__dirname + '/../public'));
 
 // Index Routing
-app.use( '/', new enrouting.routing_jaguer().enrouting );
+app.use( '/api', new enrouting.routing_jaguer().enrouting );
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
-
-
-
-mongoose.connect('mongodb://localhost:27017/jaguercf', { useMongoClient: 
-true });
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('openUri', function() {
-// we're connected!
-});
