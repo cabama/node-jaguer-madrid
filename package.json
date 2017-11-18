@@ -11,13 +11,16 @@
     "tsc:w": "tsc -w"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
+    "csvtojson": "^1.1.9",
     "ejs": "^2.5.7",
     "express": "^4.13.3",
     "jwt-simple": "^0.5.1",
     "moment": "^2.19.1",
     "mongoose": "^4.13.0",
+    "request": "^2.83.0",
     "typescript": "^2.0.3"
   },
   "devDependencies": {

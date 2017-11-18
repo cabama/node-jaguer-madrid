@@ -34,7 +34,7 @@ var matchSchema = new Schema({
   },
   letsgo: [{
     userid: {type: Schema.Types.ObjectId},
-    name: String
+    state: {type: Boolean}
   }],
   hidden: {type: Boolean, default: false}
 });

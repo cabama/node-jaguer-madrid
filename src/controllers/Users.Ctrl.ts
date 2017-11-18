@@ -55,7 +55,7 @@ export class CtrUser {
 		mdUser.name     = paramUser.name
 		mdUser.surname  = paramUser.surname
 		mdUser.email    = paramUser.email.toLowerCase()
-		mdUser.role     = 'ROLE_USER';
+		mdUser.role     = 'ADMIN';
 		mdUser.password = await byps.hash(paramUser.password)
 		// Store user in mongodb
 		this.saveUser(mdUser)
@@ -73,6 +73,7 @@ export class CtrUser {
 			this.params.password, 
 			this.params.email
 		])
+		console.log(`Parametros tomados del loging: ${this.params.password} ${this.params.email}`)
 		if (!checkParams) {this.errorRules.noUserInHeader}
 		// Consult in Mongo
 		let	user =  await MdUser.findOne({email: this.params.email});
@@ -84,7 +85,7 @@ export class CtrUser {
 		// Return token or user
 		console.log(a)
 		if (this.params.getHash) {
-			res.status(200).send({ token: jwt.createToken(user) })
+			res.status(200).send({ user, token: jwt.createToken(user) })
 		} else {
 			res.status(200).send({ user })
 		}

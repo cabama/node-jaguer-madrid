@@ -15,7 +15,7 @@ const HOST = '0.0.0.0';
 
 //Mongo
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://mongo:27017");
+mongoose.connect("mongodb://mongo:27017/jaguer");
 
 // App
 const app = express()
