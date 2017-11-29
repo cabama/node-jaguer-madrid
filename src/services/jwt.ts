@@ -9,7 +9,7 @@ export class JwtService {
 
 	static createToken (user): string {
 		var payload = {
-			sub: user.__id,
+			_id: user._id,
 			username: user.username,
 			name: user.name,
 			surname: user.surname,

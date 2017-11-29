@@ -17,3 +17,10 @@ export function everyExist (array: Array<any>): boolean {
 	}
 	return true
 }
+
+export function deleteKey (obj: any, key: string): any {
+	const index: number = this.data.indexOf(key);
+	if (index !== -1) {
+		this.data.splice(index, 1);
+	}
+}

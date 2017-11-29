@@ -6,11 +6,14 @@
   "main": "src/app.ts",
   "scripts": {
     "start": "nodemon -L -e ts,json --exec \"npm run compile\"",
+    "debug": "nodemon -L -e ts,json --exec \"npm run compileDev\"",
     "compile": "tsc && node bin/app.js",
+    "compileDev": "tsc && node --inspect=0.0.0.0:9229 bin/app.js",
     "tsc": "tsc",
     "tsc:w": "tsc -w"
   },
   "dependencies": {
+    "@types/node-schedule": "^1.2.1",
     "axios": "^0.17.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
@@ -20,6 +23,7 @@
     "jwt-simple": "^0.5.1",
     "moment": "^2.19.1",
     "mongoose": "^4.13.0",
+    "node-schedule": "^1.2.5",
     "request": "^2.83.0",
     "typescript": "^2.0.3"
   },

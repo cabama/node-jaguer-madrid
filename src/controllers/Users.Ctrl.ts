@@ -2,9 +2,10 @@ import { Request, Response } from 'express';
 import {JwtService as jwt}  from '../services/jwt'
 import * as bcrypt from 'bcrypt-nodejs'
 import * as bodyParser from 'body-parser';
-import { everyTrue, everyExist } from '../config/Utils';
+import { everyTrue, everyExist, deleteKey } from '../config/Utils';
 import * as byps from '../services/bcrypt'
 import { MdUser } from '../models/Users.Model';
+import { RequestAuth } from '../config/interfaces.type';
 
 type User = {
 	username: string
@@ -90,6 +91,48 @@ export class CtrUser {
 			res.status(200).send({ user })
 		}
 	} // loginUser
+
+	async getUserById (req, res) {
+		let userId = req.params.userId
+		let user
+		try {
+			user = await MdUser.findById(userId)
+		} catch {
+			res.status(500).send({ message: 'Error in the request.' })
+		}
+		// Return Noticia
+		if (!user) res.status(500).send({ message: 'user not exist' })
+		res.status(200).send(user.visible())
+	}
+
+	async getAllUsers (req, res) {
+		let users
+		try {
+			users = await MdUser.find()
+		} catch {
+			res.status(500).send({ message: 'Error in the request.' })
+		}
+
+		// Return Noticia
+		if (!users) res.status(500).send({ message: 'not exist users' })
+
+		const usuariosSafe = users.map( user => {
+			return user.visible()
+		})
+		res.status(200).send(usuariosSafe)
+	}
+
+	async getAllUsersAdmin(req, res) {
+		let users
+		try {
+			users = await MdUser.find()
+		} catch {
+			res.status(500).send({ message: 'Error in the request.' })
+		}
+		// Return Noticia
+		if (!users) res.status(500).send({ message: 'not exist users' })
+		res.status(200).send(users)
+	}
 
 	private getUserFromParams (): User | false  {		
 		const username =  this.params.username

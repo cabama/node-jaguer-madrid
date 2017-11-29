@@ -16,6 +16,10 @@ export interface MatchModel extends mongoose.Document {
     user: string,
     date: Date
   },
+  letsgo: {
+    userid: string,
+    status: boolean | undefined
+  }[],
   hidden: boolean
 }
 
@@ -28,17 +32,16 @@ var matchSchema = new Schema({
     tittle: String,
     gmaps: String
   },
-  createdBy: { 
-    user: {type: Schema.Types.ObjectId, ref: "Users" },
-    date: { type: Date, default: Date.now }, // por defecto la fecha actual
-  },
+  createdBy: { type: Schema.Types.ObjectId, ref: "Users" },
+  createdDate: { type: Date, default: Date.now }, // por defecto la fecha actual
   letsgo: [{
-    userid: {type: Schema.Types.ObjectId},
-    state: {type: Boolean}
+    userid: { type: Schema.Types.ObjectId },
+    status: String
   }],
-  hidden: {type: Boolean, default: false}
+  hidden: { type: Boolean, default: false }
 });
+
 
 // the schema is useless so far
 // we need to create a model using it
-export let matchModel = mongoose.model<MatchModel>('News', matchSchema);
+export let matchModel = mongoose.model<MatchModel>('Match', matchSchema);
