@@ -68,6 +68,17 @@ export class CtrUser {
 		})
 	}
 
+	async modifyUser (req: Request, res: Response) {
+		this.firstWork(req, res)
+		MdUser.findByIdAndUpdate(this.params._id, this.params)
+			.then( () => {
+				res.status(200).send('User updated!')
+			})
+			.catch( reason => {
+				res.status(500).send('Error updating user!')
+			})
+	}
+
 	async loginUser (req, res) {
 		this.firstWork(req, res)
 		let checkParams = everyExist([

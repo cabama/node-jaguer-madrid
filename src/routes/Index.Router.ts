@@ -21,6 +21,7 @@ export class routing_jaguer {
 		// this.router.get('/', this.jwt.ensureAuth, (req, res) => this.UserController.test(req, res));
 		this.router.post('/login', (req, res) => this.userController.loginUser(req, res));
 		this.router.post('/user', (req, res) => this.userController.createUser(req, res));
+		this.router.put('/user', (req, res) => this.userController.modifyUser(req, res));
 		this.router.get('/user/all', (req, res) => this.userController.getAllUsers(req, res));
 		this.router.get('/user/allAdmin', 
 			this.jwt.ensureAuth,
