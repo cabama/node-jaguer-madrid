@@ -6,6 +6,8 @@ import { everyTrue, everyExist, deleteKey } from '../config/Utils';
 import * as byps from '../services/bcrypt'
 import { MdUser } from '../models/Users.Model';
 import { RequestAuth } from '../config/interfaces.type';
+import { CONFIG } from '../config/config'
+import * as fs from 'fs'
 
 type User = {
 	username: string
@@ -144,6 +146,40 @@ export class CtrUser {
 		if (!users) res.status(500).send({ message: 'not exist users' })
 		res.status(200).send(users)
 	}
+
+	async saveAvatar (req, res) {
+		const userId = req.params.userId
+		if (req.files && !!req.files.image.path && !!userId) {
+			const filePath = req.files.image.path;
+			const fileNameSplit = filePath.split('/')
+			const fileName = fileNameSplit[fileNameSplit.length -1]
+			console.log(`fileName: ${fileName}`)
+			const fileExtensionSplit = fileName.split('.')
+			const fileExtension = fileExtensionSplit [fileExtensionSplit.length - 1]
+
+			await this.deleteAvatar(userId)
+			MdUser.findByIdAndUpdate(userId, {avatar: fileName})
+			.then (()=>{
+				res.status(200).send('filePath:' + fileExtension);
+			})
+			.catch(()=> {
+				res.status(500).send('Error uploading user avatar');
+			})
+		} else {
+			res.status(500).send(`Error subiendo el avatar, ${userId}`);
+		}
+	}
+
+	private async deleteAvatar(userId) {
+		const usuario = await MdUser.findById(userId)
+		try {
+			fs.unlinkSync(CONFIG.avatarPath + '/' +usuario.avatar)
+		} catch {
+			console.error('Error borrabdo un avatar')
+		}
+		console.log(`Usuario=>${usuario}`)
+	}
+
 
 	private getUserFromParams (): User | false  {		
 		const username =  this.params.username

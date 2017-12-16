@@ -10,6 +10,7 @@ export interface UserModel extends mongoose.Document {
   surname: String,
   role: String,
   image: String,
+  avatar: String
   visible: Function
 }
 
@@ -21,7 +22,8 @@ var userSchema = new Schema({
   name: 	String,
   surname: 	String,
   role: 	String,
-  image: 	String
+  image: 	String,
+  avatar: String
 });
 
 userSchema.method('visible', function (password: string): any {

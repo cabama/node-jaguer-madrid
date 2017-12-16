@@ -10,6 +10,11 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "outDir": "bin"
+    "outDir": "bin",
+    "paths": {
+      "@config/*": [
+        "./config/*"
+      ]
+    }
   }
 }

@@ -24,8 +24,8 @@ mongoose.connect("mongodb://mongo:27017/jaguer");
 const app = express()
 
 // set the view engine to ejs
-app.set('views', __dirname + '/../public')
-app.set('view engine', 'ejs');
+//app.set('views', __dirname + '/../public')
+//app.set('view engine', 'ejs');
 
 // Public folder
 app.use(bodyParser.json())

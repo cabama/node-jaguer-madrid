@@ -8,7 +8,9 @@ import { getRanking } from '../services/getMadridData';
 import { CtrUser } from '../controllers/Users.Ctrl'
 import { AnalyticsController } from '../controllers/analytics.Ctrl';
 import { MatchController } from '../controllers/Match.Ctrl';
-
+import { CONFIG } from '../config/config'
+import * as multipart from 'connect-multiparty';
+var md_uploads = multipart({uploadDir: CONFIG.avatarPath})
 export class routing_jaguer {
 	
 	public router = Router();
@@ -28,6 +30,12 @@ export class routing_jaguer {
 			(req, res) => this.userController.getAllUsersAdmin(req as RequestAuth, res)
 		);
 		this.router.get('/user/:userId', (req, res) => this.userController.getUserById(req, res));
+		// Upload User Avatar
+		this.router.post(
+			'/user/avatar/:userId', 
+			md_uploads,
+			(req, res) => this.userController.saveAvatar(req, res)
+	)
 		this.router.get('/data/ranking', (req, res) => this.analytics.getRanking(req, res));
 		this.router.get('/data/calendar', (req, res) => this.analytics.getCalendar(req, res));
 
