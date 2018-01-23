@@ -1,9 +1,11 @@
 
 {
+
+  "include": [
+    "src/**/*"
+  ],
   "compilerOptions": {
-    "include": [
-      "src/**/*"
-    ],
+    "rootDir": "src",
     "target": "es6",
     "module": "commonjs",
     "noImplicitAny": false,
