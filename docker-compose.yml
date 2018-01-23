@@ -2,7 +2,7 @@ version: '2'
 services:
 
   nodeapi:
-    build: node-jaguer-madrid/.
+    build: .
     image: barreiro/node-jaguer
     # command: yarn start
     command: yarn run compile
@@ -10,8 +10,8 @@ services:
       - "2525:80"
       - "9229:9229"
     volumes:
-      - ./node-jaguer-madrid/src:/usr/src/jaguer/src
-      - ./node-jaguer-madrid/public:/usr/src/jaguer/public
+      - ./src:/usr/src/jaguer/src
+      - ./public:/usr/src/jaguer/public
     links:
       - mongo
     depends_on:
