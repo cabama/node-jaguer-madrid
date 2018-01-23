@@ -9,6 +9,8 @@ services:
     ports:
       - "2525:80"
       - "9229:9229"
+    volumes_from:
+      - $(hostname) 
     volumes:
       - ./src:/usr/src/jaguer/src
       - ./public:/usr/src/jaguer/public
