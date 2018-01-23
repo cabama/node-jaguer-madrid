@@ -5,7 +5,7 @@ services:
     build: .
     image: barreiro/node-jaguer
     # command: yarn start
-    command: yarn run compile
+    command: yarn && yarn run compile
     ports:
       - "2525:80"
       - "9229:9229"
