@@ -12,3 +12,4 @@ services:
     volumes:
       - ./src:/usr/src/jaguer/src
       - ./public:/usr/src/jaguer/public
+      
