@@ -27,3 +27,4 @@ version: '2'
       - mongo
     depends_on:
       - mongo
+      
