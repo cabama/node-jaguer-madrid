@@ -16,3 +16,4 @@ RUN npm install -g concurrently
 RUN npm install typescript -g
 RUN npm install yarn -g
 RUN npm install nodemon mocha supervisor -g
+RUN yarn

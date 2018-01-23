@@ -5,11 +5,10 @@ services:
     build: .
     image: barreiro/node-jaguer
     # command: yarn start
-    command: yarn && yarn run compile
+    command: yarn run compile
     ports:
       - "2525:80"
       - "9229:9229"
     volumes:
       - ./src:/usr/src/jaguer/src
       - ./public:/usr/src/jaguer/public
-      
