@@ -10,5 +10,5 @@ services:
       - "2525:80"
       - "9229:9229"
     volumes:
-      - ./src:/usr/src/jaguer/src
-      - ./public:/usr/src/jaguer/public
+      - src:/usr/src/jaguer/src
+      - public:/usr/src/jaguer/public
