@@ -1,17 +1,5 @@
 version: '2'
 services:
-  nginx:
-    build: nginx/.
-    image: barreiro/nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./ng-jaguer-madrid/dist:/usr/share/nginx/angular
-    links:
-      - nodeapi:nodeapi
-      - angular:angular
-    depends_on:
-      - angular
 
   nodeapi:
     build: node-jaguer-madrid/.
