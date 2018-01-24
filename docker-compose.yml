@@ -4,6 +4,7 @@ services:
   nodeapi:
     build: .
     image: barreiro/node-jaguer
+    network_mode: bridge
     # command: yarn start
     command: yarn run compile
     ports:
