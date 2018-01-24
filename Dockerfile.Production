@@ -7,8 +7,6 @@ WORKDIR /usr/src/jaguer
 
 # COPY PROJECT SETTINGS
 ADD package.json /usr/src/jaguer
-ADD tsconfig.json /usr/src/jaguer
-ADD src /usr/src/jaguer
 
 # Install Nodemon
 RUN npm install
@@ -19,3 +17,5 @@ RUN npm install yarn -g
 RUN npm install nodemon mocha supervisor -g
 RUN yarn
 
+ADD tsconfig.json /usr/src/jaguer
+ADD src /usr/src/jaguer/src
