@@ -2,7 +2,7 @@ version: '2'
 services:
 
   nodeapi:
-    build:  ./Dockerfile-Production
+    build:  .
     image: barreiro/node-jaguer
     # command: yarn start
     command: yarn run compile
