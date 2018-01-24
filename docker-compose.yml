@@ -10,5 +10,5 @@ services:
     ports:
       - "2525:80"
       - "9229:9229"
-    links:
+    external_links:
       - mongo
